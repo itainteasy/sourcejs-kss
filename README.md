@@ -2,7 +2,8 @@
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/sourcejs/Source)
 
-Appends rendered [DSS](https://github.com/darcyclarke/DSS) documentation into SourceJS Spec pages. Watch rendered [example Spec](http://sourcejs.com/specs/example-specs-showcase/dss/) and it's [source code](https://github.com/sourcejs/example-specs-showcase/blob/master/dss/css/dss.css).
+Appends rendered [KSS](https://github.com/kss-node/kss-node) documentation into SourceJS Spec pages.
+Syntax for style documentation can be found [here](https://github.com/kss-node/kss/blob/spec/SPEC.md).
 
 [SourceJS](http://sourcejs.com) plugin (for 0.5.0+ version).
 
@@ -11,16 +12,16 @@ Appends rendered [DSS](https://github.com/darcyclarke/DSS) documentation into So
 To install middleware, run npm command in `sourcejs/user` folder:
 
 ```
-npm install sourcejs-contrib-dss --save
+npm install sourcejs-kss --save
 ```
 
 After restarting your app, middleware will be loaded automatically. To disable it, remove npm module and restart the app.
 
 ## Usage
 
-DSS works as SourceJS middleware, when Spec (documentation page) is requested, plugin is searching CSS files in Spec folder by defined mask.
+KSS works as SourceJS middleware, when Spec (documentation page) is requested, plugin is searching CSS files in Spec folder by defined mask.
 
-All found CSS (or LESS/SASS/SCSS/Stylus) will be processed through [DSS](https://github.com/darcyclarke/DSS) in runtime, during request.
+All found CSS (or LESS/SASS/SCSS/Stylus) will be processed through [KSS](https://github.com/kss-node/kss-node) in runtime, during request.
 
 Here's an example of Spec folder structure
 
@@ -33,34 +34,39 @@ specs/button
 
 `button.css` contents:
 
-```css
-/**
-  * @name Default
-  *
-  * @state .button-pro_big - Bigger version
-  *
-  * @markup
-  *   <button class="button-pro">Click me</button>
-  */
-
+```scss
+// Default
+//
+// Your standard button suitable for clicking.
+//
+// Markup:
+// <button class="button-pro">Click me</button>
+//
+// Styleguide 1
 .button-pro {}
+
+// Default Big
+//
+// Your enlarged button suitable for clicking.
+//
+// Markup:
+// <button class="button-pro button-pro_big">Click me</button>
+//
+// Styleguide 1.1
 .button-pro.button-pro_big {}
 
-/**
-  * @name Disabled
-  *
-  * @state .button-pro_big - Bigger disabled version
-  *
-  * @markup
-  *   <button class="button-pro button-pro_disabled">Click me</button>
-  */
-
+// Default Disabled
+//
+// Your button which is disabled
+//
+// Markup:
+// <button class="button-pro button-pro_big">Click me</button>
+//
+// Styleguide 1.1
 .button-pro.button-pro_disabled {}
 ```
 
 Spec rendered result (http://127.0.0.1:8080/specs/button):
-
-![image](http://d.pr/i/GH6g+)
 
 `readme.md` contents will be rendered at the top of Spec file. Other file types as `index.src` or `index.jade` (with [Jade plugin](https://github.com/sourcejs/sourcejs-jade)) could also be used.
 
@@ -91,7 +97,7 @@ You can configure plugin options from `user/options.js`:
 Type: `String`
 Default value: `**/*.{css,less,stylus,sass,scss}`
 
-Glob mask for searching CSS files for DSS parsing, starting from requested Spec path (https://github.com/isaacs/node-glob).
+Glob mask for searching CSS files for KSS parsing, starting from requested Spec path (https://github.com/isaacs/node-glob).
 
 ### visibleCode
 
@@ -109,13 +115,7 @@ Type: `Object`
 Type: `String`
 Default: `path.join(__dirname, '../views/sections.ejs')`
 
-Set path to EJS template for rendering DSS JSON result. Currently this plugin uses only one template for sections.
-
-## Upcoming features
-
-* DSS parser caching
-* Pre-build cache (during app start)
-* DSS improvements
+Set path to EJS template for rendering KSS JSON result. Currently this plugin uses only one template for sections.
 
 ## Other SourceJS middlewares
 
