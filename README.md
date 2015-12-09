@@ -81,7 +81,7 @@ You can configure plugin options from `user/options.js`:
     core: {},
     assets: {},
     plugins: {
-        dss: {
+        kss: {
            targetCssMask: '**/*.{css,less,stylus,sass,scss}',
            visibleCode: true,
            templates: {
