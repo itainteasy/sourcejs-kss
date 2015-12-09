@@ -1,12 +1,12 @@
 {
-  "name": "sourcejs-contrib-dss",
+  "name": "sourcejs-kss",
   "version": "0.1.0",
-  "author": "Robert Haritonov",
-  "description": "CSS Documentation parser integration for transporting DSS into SourceJS Specs",
+  "author": "Elysia Ong",
+  "description": "CSS Documentation parser integration for transporting KSS into SourceJS Specs",
   "dependencies": {
     "cheerio": "^0.18.0",
     "deep-extend": "^0.3.2",
-    "dss": "^1.0.4",
+    "kss": "^2.1.1",
     "ejs": "^2.3.1",
     "glob": "^5.0.3",
     "pretty-hrtime": "^1.0.0"
