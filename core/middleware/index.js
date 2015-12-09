@@ -1,4 +1,4 @@
-var dss = require('dss');
+var dss = require('kss');
 var path = require('path');
 var deepExtend = require('deep-extend');
 var glob = require('glob');
@@ -101,20 +101,8 @@ var processRequest = function (req, res, next) {
                     try {
                         var file = fs.readFileSync(fullPath, 'utf-8');
 
-                        dss.parse(file, {}, function(parsed) {
-
-                            // Normalizing DSS parser output https://github.com/darcyclarke/DSS/issues/58
-                            parsed.blocks.forEach(function(block){
-                                for (var key in block) {
-                                    var value = block[key];
-
-                                    if (key === 'state' && !util.isArray(value)) {
-                                        block[key] = [value];
-                                    }
-                                }
-                            });
-
-                            dataForTemplates.sections = dataForTemplates.sections.concat(parsed.blocks);
+                        dss.parse(file, {}, function(error, parsed) {
+                            dataForTemplates.sections = dataForTemplates.sections.concat(parsed.data.sections);
                         });
                     } catch(err) {
                         global.log.debug('DSS error parsing '+ fullPath +':', err);
